@@ -526,7 +526,7 @@ func (j *Javadoc) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 		deps.systemModules, deps.classpath, j.sourcepaths)
 
 	cmd.FlagWithArg("-source ", javaVersion.String()).
-		Flag("-J-Xmx1024m").
+		Flag("-J-Xmx8024m").
 		Flag("-XDignore.symbol.file").
 		Flag("-Xdoclint:none")
 
@@ -599,7 +599,7 @@ func (d *Droiddoc) doclavaDocsFlags(ctx android.ModuleContext, cmd *android.Rule
 	// sources, droiddoc will get sources produced by metalava which will have already stripped out the
 	// 1.9 language features.
 	cmd.FlagWithArg("-source ", getStubsJavaVersion().String()).
-		Flag("-J-Xmx1600m").
+		Flag("-J-Xmx8600m").
 		Flag("-J-XX:-OmitStackTraceInFastThrow").
 		Flag("-XDignore.symbol.file").
 		Flag("--ignore-source-errors").
@@ -694,6 +694,7 @@ func javadocCmd(ctx android.ModuleContext, rule *android.RuleBuilder, srcs andro
 	cmd := rule.Command().
 		BuiltTool("soong_javac_wrapper").Tool(config.JavadocCmd(ctx)).
 		Flag(config.JavacVmFlags).
+		Flag("-J-Xmx8691m").
 		FlagWithArg("-encoding ", "UTF-8").
 		FlagWithRspFileInputList("@", android.PathForModuleOut(ctx, "javadoc.rsp"), srcs).
 		FlagWithInput("@", srcJarList)
@@ -763,6 +764,7 @@ func dokkaCmd(ctx android.ModuleContext, rule *android.RuleBuilder,
 	return rule.Command().
 		BuiltTool("dokka").
 		Flag(config.JavacVmFlags).
+		Flag("-J-Xmx8691m").
 		Flag("-J--add-opens=java.base/java.lang=ALL-UNNAMED").
 		Flag(srcJarDir.String()).
 		FlagWithInputList("-classpath ", dokkaClasspath, ":").

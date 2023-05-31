@@ -69,6 +69,7 @@ type robolectricProperties struct {
 	// Use /external/robolectric rather than /external/robolectric-shadows as the version of robolectri
 	// to use.  /external/robolectric closely tracks github's master, and will fully replace /external/robolectric-shadows
 	Upstream *bool
+
 }
 
 type robolectricTest struct {
@@ -113,10 +114,10 @@ func (r *robolectricTest) DepsMutator(ctx android.BottomUpMutatorContext) {
 		ctx.AddVariationDependencies(nil, libTag, fmt.Sprintf(robolectricPrebuiltLibPattern, v))
 	} else {
 		if proptools.Bool(r.robolectricProperties.Upstream) {
-			ctx.AddVariationDependencies(nil, libTag, robolectricCurrentLib+"_upstream")
-		} else {
-			ctx.AddVariationDependencies(nil, libTag, robolectricCurrentLib)
-		}
+              ctx.AddVariationDependencies(nil, libTag, robolectricCurrentLib+"_upstream")
+        } else {
+              ctx.AddVariationDependencies(nil, libTag, robolectricCurrentLib)
+        }
 	}
 
 	ctx.AddVariationDependencies(nil, libTag, robolectricDefaultLibs...)
