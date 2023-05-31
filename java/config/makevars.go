@@ -44,7 +44,7 @@ func makeVarsProvider(ctx android.MakeVarsContext) {
 	ctx.Strict("COMMON_JDK_FLAGS", "${CommonJdkFlags}")
 
 	ctx.Strict("DX", "${D8Cmd}")
-	ctx.Strict("DX_COMMAND", "${D8Cmd} -JXms16M -JXmx2048M")
+	ctx.Strict("DX_COMMAND", "${D8Cmd} -JXms16M -JXmx6048M")
 	ctx.Strict("R8_COMPAT_PROGUARD", "${R8Cmd}")
 
 	ctx.Strict("TURBINE", "${TurbineJar}")
@@ -55,8 +55,8 @@ func makeVarsProvider(ctx android.MakeVarsContext) {
 		ctx.Strict("ERROR_PRONE_CHECKS", "${ErrorProneChecks}")
 	}
 
-	ctx.Strict("TARGET_JAVAC", "${JavacCmd}  ${JavacVmFlags} ${CommonJdkFlags}")
-	ctx.Strict("HOST_JAVAC", "${JavacCmd}  ${JavacVmFlags} ${CommonJdkFlags}")
+	ctx.Strict("TARGET_JAVAC", "${JavacCmd} -J-Xmx8158m ${JavacVmFlags} ${CommonJdkFlags}")
+	ctx.Strict("HOST_JAVAC", "${JavacCmd} -J-Xmx8158m ${JavacVmFlags} ${CommonJdkFlags}")
 
 	ctx.Strict("JLINK", "${JlinkCmd}")
 	ctx.Strict("JMOD", "${JmodCmd}")
